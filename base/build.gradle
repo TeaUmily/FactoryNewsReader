@@ -1,0 +1,67 @@
+import dependencies.versions
+import dependencies.plugin
+import dependencies.deps
+
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+}
+
+kapt {
+    correctErrorTypes = true
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation plugin.kotlin.runtime
+    api deps.ktx
+
+    //VIEWMODEL
+    api deps.viewmodel
+
+    //SUPPORT
+    implementation deps.support.appCompact
+    api deps.support.constraintLayout
+    api deps.support.livedata
+
+    // KOIN
+    api deps.koin.android
+    api deps.koin.viewModel
+
+    //NETWORKING
+    api deps.retrofit.retrofit
+    api deps.retrofit.rxJavaAdapter
+    api deps.retrofit.converterGson
+    api deps.retrofit.loggingInterceptor
+
+
+    //NAVIGATION
+    api deps.navigation.fragment
+    api deps.navigation.ui
+
+    //RX
+    api deps.rx.kotlin
+    api deps.rx.android
+    api deps.rx.binding
+    api deps.rx.java
+
+    //GLIDE
+    api deps.glide
+
+    // EPOXY
+    api deps.epoxy.dep
+}
