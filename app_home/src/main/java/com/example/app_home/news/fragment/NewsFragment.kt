@@ -12,34 +12,31 @@ import com.example.app_home.view_model.NewsUI
 import com.example.app_home.view_model.NewsVM
 import kotlinx.android.synthetic.main.fragment_news.*
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 
 open class NewsFragment : BaseFragment<NewsVM>(), ArticleClick {
 
-    companion object{
+    companion object {
         const val EXTRA_CLICK_POSITION = "EXTRA_POSITION"
     }
 
-    private val newsController by inject<NewsController>{parametersOf(this)}
-    override val viewModel: NewsVM by viewModel()
+    private val newsController by inject<NewsController> { parametersOf(this) }
+    override val viewModel: NewsVM by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         newsRecyclerView.setController(newsController)
 
-    }
-
-    override fun getLayoutResources() = R.layout.fragment_news
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
         initObservers()
 
     }
+
+
+    override fun getLayoutResources() = R.layout.fragment_news
 
     private fun initObservers() {
         viewModel.newsData.observe(viewLifecycleOwner, Observer { data ->
@@ -49,19 +46,21 @@ open class NewsFragment : BaseFragment<NewsVM>(), ArticleClick {
         })
     }
 
-    override fun onArticleClick(position: Int) {
+    override fun onTextClick(position: Int) {
         val bundle = Bundle()
         bundle.putInt(EXTRA_CLICK_POSITION, position)
         findNavController().navigate(R.id.openSingleFeatureAction, bundle)
     }
 
+    override fun onDelete(position: Int) {
+        viewModel.deleteArticle(position)
+    }
 }
-
 
 interface ArticleClick {
-    fun onArticleClick(position: Int)
+    fun onTextClick(position: Int)
+    fun onDelete(position: Int)
 }
-
 
 class NewsController(private val listener: ArticleClick) : TypedEpoxyController<NewsUI>() {
 
@@ -72,8 +71,11 @@ class NewsController(private val listener: ArticleClick) : TypedEpoxyController<
                 id(i++)
                 image(newsCell.image)
                 description(newsCell.description)
-                clickListener{ _, _, _, position ->
-                    listener.onArticleClick(position)
+                clickListener { _, _, clickedView, position ->
+                    when (clickedView.id) {
+                        R.id.tvDescription -> listener.onTextClick(position)
+                        R.id.deleteBtn -> listener.onDelete(position)
+                    }
                 }
             }
         }

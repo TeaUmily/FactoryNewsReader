@@ -4,14 +4,14 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/home_feature_graph"
             tools:ignore="MissingDefaultResource,UnusedNavigation"
-            app:startDestination="@id/homeFragment">
+            app:startDestination="@id/fragmentNavigation">
 
     <include app:graph = "@navigation/single_feature_graph"/>
 
     <fragment
-            android:id="@+id/homeFragment"
-            android:name="com.example.app_home.news.fragment.NewsFragment"
-            tools:layout="@layout/fragment_news">
+            android:id="@+id/fragmentNavigation"
+            android:name="com.example.app_home.news.fragment.NavigationFragment"
+            tools:layout="@layout/fragment_frame">
 
         <action
                 android:id="@+id/openSingleFeatureAction"
@@ -21,9 +21,7 @@
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim"
                 app:popExitAnim="@anim/nav_default_pop_exit_anim">
 
-
         </action>
-
 
     </fragment>
 

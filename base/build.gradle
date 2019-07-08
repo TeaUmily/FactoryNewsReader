@@ -37,6 +37,9 @@ dependencies {
     implementation deps.support.appCompact
     api deps.support.constraintLayout
     api deps.support.livedata
+    api deps.support.material
+    api deps.support.design
+
 
     // KOIN
     api deps.koin.android

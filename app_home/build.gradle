@@ -28,6 +28,8 @@ dependencies {
     implementation plugin.kotlin.runtime
     implementation deps.support.appCompact
 
+
+
     kapt deps.epoxy.annotation
 
 }

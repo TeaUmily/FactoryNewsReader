@@ -1,6 +1,8 @@
 package com.example.app_home.news.view_holder
 
+
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.airbnb.epoxy.EpoxyAttribute
@@ -20,22 +22,46 @@ abstract class NewsItemHolderModel : EpoxyModelWithHolder<NewsItemHolder>() {
     lateinit var description: String
     @EpoxyAttribute(hash = false)
     lateinit var clickListener: View.OnClickListener
-
+    private var isImageClicked = false
 
     override fun bind(holder: NewsItemHolder) {
 
-        holder.cell.setOnClickListener(clickListener)
+        holder.description.setOnClickListener(clickListener)
+
+        holder.imageView.setOnClickListener {
+            isImageClicked = !isImageClicked
+            changeContent(holder)
+        }
+
+        holder.deleteBtn.setOnClickListener {
+            isImageClicked = !isImageClicked
+            clickListener.onClick(it)
+            changeContent(holder)
+        }
+
         Glide.with(holder.imageView.context)
             .load(image)
             .into(holder.imageView)
         holder.description.text = description
     }
+
+    private fun changeContent(holder: NewsItemHolder) {
+        if (isImageClicked) {
+            holder.description.visibility = View.INVISIBLE
+            holder.deleteBtn.visibility = View.VISIBLE
+        } else {
+            holder.description.visibility = View.VISIBLE
+            holder.deleteBtn.visibility = View.INVISIBLE
+        }
+    }
+
 }
 
 class NewsItemHolder : KotlinHolder() {
 
     val imageView by bind<ImageView>(R.id.ivNews)
     val description by bind<TextView>(R.id.tvDescription)
-    val cell by bind<View>(R.id.articleCell)
+    val deleteBtn by bind<Button>(R.id.deleteBtn)
 
 }
+

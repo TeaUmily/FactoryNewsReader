@@ -2,8 +2,7 @@ package com.example.app_home.common.di
 
 import com.example.app_home.common.interactor.NewsInteractor
 import com.example.app_home.common.rest_interface.NewsRestInterface
-import com.example.app_home.news.fragment.ArticleClick
-import com.example.app_home.news.fragment.NewsController
+import com.example.app_home.news.fragment.*
 import com.example.app_home.view_model.NewsVM
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -14,6 +13,7 @@ val newsModule = module {
     factory { NewsInteractor(get()) }
     viewModel { NewsVM(get()) }
 
+    factory {  DeletedNewsController() }
     factory { (listener: ArticleClick) -> NewsController(listener) }
 }
 

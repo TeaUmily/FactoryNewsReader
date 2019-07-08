@@ -39,6 +39,7 @@ object versions {
     val lifecycle = "2.0.0"
     val support = "27.1.1"
     val glide = "4.9.0"
+    val material = "1.0.0-rc01"
 }
 
 
@@ -71,6 +72,8 @@ object deps {
         val constraintLayout = "androidx.constraintlayout:constraintlayout:${versions.constraint}"
         val livedata = "androidx.lifecycle:lifecycle-livedata:${versions.lifecycle}"
         val design =  "com.android.support:design:${versions.support}"
+        val material = "com.google.android.material:material:${versions.material}"
+
 
     }
 

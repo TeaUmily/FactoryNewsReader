@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Factory News Reader</string>
+    <string name="news">NEWS</string>
+    <string name="deleted">DELETED</string>
 </resources>
