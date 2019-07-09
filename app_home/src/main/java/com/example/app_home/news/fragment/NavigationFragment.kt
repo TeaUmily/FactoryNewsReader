@@ -24,13 +24,13 @@ class NavigationFragment : Fragment() {
 
         tabs.getTabAt(0)!!.setText(R.string.news)
         tabs.getTabAt(1)!!.setText(R.string.deleted)
+
     }
 
     override fun onResume() {
         super.onResume()
         activity!!.title = getString(R.string.app_name)
     }
-
 }
 
 class HomeViewPagerAdapter(fm: FragmentManager, private val size: Int) : FragmentStatePagerAdapter(fm) {

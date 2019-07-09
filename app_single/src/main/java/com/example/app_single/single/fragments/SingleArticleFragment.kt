@@ -15,7 +15,6 @@ class SingleArticleFragment : Fragment() {
 
     private val viewModel by sharedViewModel<SingleVM>()
 
-
     companion object {
         const val EXTRA_POSITION = "EXTRA_POSITION"
         fun newInstance(position: Int): SingleArticleFragment {

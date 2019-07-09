@@ -3,7 +3,6 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/home_feature_graph"
-            tools:ignore="MissingDefaultResource,UnusedNavigation"
             app:startDestination="@id/fragmentNavigation">
 
     <include app:graph = "@navigation/single_feature_graph"/>

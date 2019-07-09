@@ -67,4 +67,8 @@ dependencies {
 
     // EPOXY
     api deps.epoxy.dep
+
+    //FIREBASE
+    api deps.firebase
 }
+

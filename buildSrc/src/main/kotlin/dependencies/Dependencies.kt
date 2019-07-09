@@ -11,7 +11,6 @@ object config {
 
 }
 
-
 object versions {
     val buildTools = "29.0.0"
 
@@ -27,7 +26,7 @@ object versions {
     val koin = "2.0.1"
     val retrofit = "2.6.0"
     val loggingInterceptor = "3.10.0"
-    val nav_version_ktx = "2.1.0-alpha05"
+    val nav_version_ktx = "2.1.0-alpha06"
     val arch = "2.1.0-alpha03"
     val epoxy = "3.7.0"
     val butterknife = "10.1.0"
@@ -37,9 +36,11 @@ object versions {
     val rx_kotlin_2 = "2.2.0"
     val constraint = "1.1.3"
     val lifecycle = "2.0.0"
-    val support = "27.1.1"
+    val support = "28.0.0"
     val glide = "4.9.0"
     val material = "1.0.0-rc01"
+    val firebase = "17.0.0"
+    val services = "4.3.0"
 }
 
 
@@ -57,6 +58,9 @@ object plugin {
         val butter = "com.jakewharton:butterknife-gradle-plugin:${versions.butterknife}"
     }
 
+    object firebase{
+        val services = "com.google.gms:google-services:${versions.services}"
+    }
 }
 
 
@@ -65,13 +69,13 @@ object deps {
     val ktx = "androidx.core:core-ktx:${versions.ktx}"
     val viewmodel = "androidx.lifecycle:lifecycle-viewmodel:${versions.arch}"
     val glide = "com.github.bumptech.glide:glide:${versions.glide}"
+    val firebase = "com.google.firebase:firebase-core:${versions.firebase}"
 
-
-    object support{
+    object support {
         val appCompact = "androidx.appcompat:appcompat:${versions.androidX}"
         val constraintLayout = "androidx.constraintlayout:constraintlayout:${versions.constraint}"
         val livedata = "androidx.lifecycle:lifecycle-livedata:${versions.lifecycle}"
-        val design =  "com.android.support:design:${versions.support}"
+        val design = "com.android.support:design:${versions.support}"
         val material = "com.google.android.material:material:${versions.material}"
 
 
@@ -89,7 +93,7 @@ object deps {
         val viewModel = "org.koin:koin-androidx-viewmodel:${versions.koin}"
     }
 
-    object navigation{
+    object navigation {
         val fragment = "androidx.navigation:navigation-fragment-ktx:${versions.nav_version_ktx}"
         val ui = "androidx.navigation:navigation-ui-ktx:${versions.nav_version_ktx}"
     }

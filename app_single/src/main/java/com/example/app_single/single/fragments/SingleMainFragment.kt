@@ -1,5 +1,6 @@
 package com.example.app_single.single.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
@@ -20,8 +21,15 @@ class SingleMainFragment : BaseFragment<SingleVM>(), ViewPager.OnPageChangeListe
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val position = arguments!!.getInt("EXTRA_POSITION", 0)
-        viewModel.position = position
+        val position = arguments!!.getInt("EXTRA_POSITION", -1)
+        val id = arguments!!.getInt("ID", 0)
+
+        if(position == -1) {
+            viewModel.position = viewModel.getPosition(id)
+        }
+        else {
+            viewModel.position = position
+        }
 
         initObserver()
 

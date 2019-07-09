@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "744076840815",
+    "firebase_url": "https://factorynewsreader.firebaseio.com",
+    "project_id": "factorynewsreader",
+    "storage_bucket": "factorynewsreader.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:744076840815:android:d553edf8437421aa",
+        "android_client_info": {
+          "package_name": "com.example.factorynewsreader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "744076840815-5313pevugbhh75a2d5ffl9egug42lqfq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJxJCw4hJ2JWOfBjh1AlfE-3O6DZxk_34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "744076840815-5313pevugbhh75a2d5ffl9egug42lqfq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

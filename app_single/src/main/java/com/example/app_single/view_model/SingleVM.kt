@@ -3,6 +3,7 @@ package com.example.app_single.view_model
 import androidx.lifecycle.MutableLiveData
 import com.example.app_common.base.view_model.BaseViewModel
 import com.example.app_home.common.interactor.SingleInteractor
+import java.util.Locale.filter
 
 class SingleVM(private val interactor: SingleInteractor) : BaseViewModel() {
 
@@ -30,6 +31,10 @@ class SingleVM(private val interactor: SingleInteractor) : BaseViewModel() {
         return singleData.value!!.data[position]
     }
 
+    fun getPosition(id: Int): Int{
+        // ovdje se treba prema IDu pronaci article i vratiti njegovu poziciju
+        return id
+    }
 
     fun getTitle() : String{
         return singleData.value!!.data[position].title
