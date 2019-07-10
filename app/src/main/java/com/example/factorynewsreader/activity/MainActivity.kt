@@ -45,6 +45,8 @@ class MainActivity : BaseActivity() {
     private fun setupNavigation() {
         val navController = Navigation.findNavController(findViewById(R.id.homeNavigationFragment))
         NavigationUI.setupActionBarWithNavController(this@MainActivity, navController)
+
+
     }
 
 }

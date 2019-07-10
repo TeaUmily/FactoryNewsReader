@@ -22,26 +22,24 @@ abstract class NewsItemHolderModel : EpoxyModelWithHolder<NewsItemHolder>() {
     lateinit var description: String
     @EpoxyAttribute(hash = false)
     lateinit var clickListener: View.OnClickListener
-    @EpoxyAttribute
-    var newsTab: Boolean = false
     private var isImageClicked = false
 
     override fun bind(holder: NewsItemHolder) {
 
-        if(newsTab){
-            holder.description.setOnClickListener(clickListener)
 
-            holder.imageView.setOnClickListener {
-                isImageClicked = !isImageClicked
-                changeContent(holder)
-            }
+        holder.description.setOnClickListener(clickListener)
 
-            holder.deleteBtn.setOnClickListener {
-                isImageClicked = !isImageClicked
-                clickListener.onClick(it)
-                changeContent(holder)
-            }
+        holder.imageView.setOnClickListener {
+            isImageClicked = !isImageClicked
+            changeContent(holder)
         }
+
+        holder.deleteBtn.setOnClickListener {
+            isImageClicked = !isImageClicked
+            clickListener.onClick(it)
+            changeContent(holder)
+        }
+
 
         Glide.with(holder.imageView.context)
             .load(image)

@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.navigation.Navigation
+import androidx.navigation.ui.setupWithNavController
 import com.example.app_home.R
 import kotlinx.android.synthetic.main.fragment_bottom_nav.*
+
 
 class NavigationFragment : Fragment() {
 
@@ -19,12 +20,8 @@ class NavigationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tabs.setupWithViewPager(homeViewPager)
-        homeViewPager.adapter = HomeViewPagerAdapter(childFragmentManager, 2)
-
-        tabs.getTabAt(0)!!.setText(R.string.news)
-        tabs.getTabAt(1)!!.setText(R.string.deleted)
-
+        val navController = Navigation.findNavController(requireActivity(), R.id.bottomNavigationFragment)
+        bottomNavigation.setupWithNavController(navController)
     }
 
     override fun onResume() {
@@ -33,16 +30,3 @@ class NavigationFragment : Fragment() {
     }
 }
 
-class HomeViewPagerAdapter(fm: FragmentManager, private val size: Int) : FragmentStatePagerAdapter(fm) {
-
-
-    override fun getCount() = size
-
-    override fun getItem(position: Int): Fragment {
-        return when (position) {
-            0 -> NewsFragment("news")
-            1 -> NewsFragment("deleted")
-            else -> NewsFragment("news")
-        }
-    }
-}
