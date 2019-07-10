@@ -20,6 +20,7 @@ android {
         targetSdkVersion versions.targetSdk
         versionCode config.versionCode
         versionName config.versionName
+        multiDexEnabled true
         testInstrumentationRunner config.testRunner
     }
     buildTypes {

@@ -21,8 +21,6 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.core.parameter.parametersOf
 
 
-
-
 const val EXTRA_CLICK_POSITION = "EXTRA_POSITION"
 
 open class NewsFragment : BaseFragment<NewsVM>(), ArticleClick {
@@ -35,7 +33,6 @@ open class NewsFragment : BaseFragment<NewsVM>(), ArticleClick {
 
         newsRecyclerView.setController(newsController)
         initObservers()
-        newsController.setData(NewsUI(mutableListOf<NewsCell>(NewsCell("The ambassador steps down after emails criticising President Trump's administration were leaked.","https://ichef.bbci.co.uk/news/1024/branded_news/0179/production/_107777300_366eca34-89b6-46ee-b53e-260f5e6944e5.jpg" ))))
 
     }
 
@@ -44,8 +41,7 @@ open class NewsFragment : BaseFragment<NewsVM>(), ArticleClick {
     private fun initObservers() {
         viewModel.newsData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-
-                   newsController.setData(it)
+                   newsController.setData(viewModel.getNews())
             }
         })
     }
@@ -70,11 +66,12 @@ class NewsController(private val listener: ArticleClick) : TypedEpoxyController<
 
     override fun buildModels(data: NewsUI) {
         var i: Long = 0
-        data.data.forEach { newsCell ->
+        data.data.forEachIndexed {_, newsCell ->
             newsItemHolder {
                 id(i++)
                 image(newsCell.image)
                 description(newsCell.description)
+                notDeleted(!newsCell.deleted)
                 clickListener { _, _, clickedView, position ->
                     when (clickedView.id) {
                         R.id.tvDescription -> listener.onTextClick(position)

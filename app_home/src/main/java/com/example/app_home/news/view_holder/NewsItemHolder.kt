@@ -11,6 +11,7 @@ import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.bumptech.glide.Glide
 import com.example.app_home.R
 import com.example.app_home.R2
+import com.example.app_home.R2.string.deleted
 import com.example.deliverytest.base.epoxy.KotlinHolder
 
 @EpoxyModelClass(layout = R2.layout.cell_news_item)
@@ -23,23 +24,25 @@ abstract class NewsItemHolderModel : EpoxyModelWithHolder<NewsItemHolder>() {
     @EpoxyAttribute(hash = false)
     lateinit var clickListener: View.OnClickListener
     private var isImageClicked = false
+    @EpoxyAttribute
+    var notDeleted: Boolean = true
 
     override fun bind(holder: NewsItemHolder) {
 
+        if (notDeleted) {
+            holder.description.setOnClickListener(clickListener)
 
-        holder.description.setOnClickListener(clickListener)
+            holder.imageView.setOnClickListener {
+                isImageClicked = !isImageClicked
+                changeContent(holder)
+            }
 
-        holder.imageView.setOnClickListener {
-            isImageClicked = !isImageClicked
-            changeContent(holder)
+            holder.deleteBtn.setOnClickListener {
+                isImageClicked = !isImageClicked
+                clickListener.onClick(it)
+                changeContent(holder)
+            }
         }
-
-        holder.deleteBtn.setOnClickListener {
-            isImageClicked = !isImageClicked
-            clickListener.onClick(it)
-            changeContent(holder)
-        }
-
 
         Glide.with(holder.imageView.context)
             .load(image)

@@ -15,4 +15,9 @@
             android:name="com.example.app_home.news.fragment.DeletedNewsFragment"
             tools:layout="@layout/fragment_news"/>
 
+    <fragment
+            android:id="@+id/moreNewsFragment"
+            android:name="com.example.app_home.news.fragment.MoreNewsFragment"
+            tools:layout="@layout/fragment_more_news"/>
+
 </navigation>
