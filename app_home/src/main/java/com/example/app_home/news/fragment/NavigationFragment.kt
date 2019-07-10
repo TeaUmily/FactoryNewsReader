@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.app_home.R
-import kotlinx.android.synthetic.main.fragment_frame.*
+import kotlinx.android.synthetic.main.fragment_bottom_nav.*
 
 class NavigationFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-        inflater.inflate(R.layout.fragment_frame, container, false)
+        inflater.inflate(R.layout.fragment_bottom_nav, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,9 +40,9 @@ class HomeViewPagerAdapter(fm: FragmentManager, private val size: Int) : Fragmen
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> NewsFragment()
-            1 -> DeletedNewsFragment()
-            else -> NewsFragment()
+            0 -> NewsFragment("news")
+            1 -> NewsFragment("deleted")
+            else -> NewsFragment("news")
         }
     }
 }

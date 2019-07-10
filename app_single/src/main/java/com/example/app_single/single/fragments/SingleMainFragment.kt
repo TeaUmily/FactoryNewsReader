@@ -1,9 +1,9 @@
 package com.example.app_single.single.fragments
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.example.app_common.base.fragment.BaseFragment
 import com.example.app_single.R
@@ -21,18 +21,26 @@ class SingleMainFragment : BaseFragment<SingleVM>(), ViewPager.OnPageChangeListe
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val position = arguments!!.getInt("EXTRA_POSITION", -1)
-        val id = arguments!!.getInt("ID", 0)
+        if (arguments!!.getBoolean("from notification")) {
 
-        if(position == -1) {
-            viewModel.position = viewModel.getPosition(id)
-        }
-        else {
-            viewModel.position = position
+            handleOnBackPressed()
+            viewModel.position = viewModel.getPosition(arguments!!.getInt("EXTRA_POSITION", 0))
+
+        } else {
+            viewModel.position = arguments!!.getInt("EXTRA_POSITION", 0)
         }
 
         initObserver()
 
+    }
+
+    private fun handleOnBackPressed() {
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigateUp()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
 
     private fun initObserver() {
@@ -58,5 +66,6 @@ class SingleMainFragment : BaseFragment<SingleVM>(), ViewPager.OnPageChangeListe
         viewModel.position = position
         activity!!.title = viewModel.getTitle()
     }
+
 
 }

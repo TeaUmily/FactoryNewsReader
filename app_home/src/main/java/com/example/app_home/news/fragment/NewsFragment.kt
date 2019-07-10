@@ -16,14 +16,11 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 import org.koin.core.parameter.parametersOf
 
+const val EXTRA_CLICK_POSITION = "EXTRA_POSITION"
 
-open class NewsFragment : BaseFragment<NewsVM>(), ArticleClick {
+open class NewsFragment(val currentTab: String) : BaseFragment<NewsVM>(), ArticleClick {
 
-    companion object {
-        const val EXTRA_CLICK_POSITION = "EXTRA_POSITION"
-    }
-
-    private val newsController by inject<NewsController> { parametersOf(this) }
+    private val newsController by inject<NewsController> { parametersOf(currentTab, this ) }
     override val viewModel: NewsVM by sharedViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,7 +37,16 @@ open class NewsFragment : BaseFragment<NewsVM>(), ArticleClick {
     private fun initObservers() {
         viewModel.newsData.observe(viewLifecycleOwner, Observer { data ->
             data?.let {
-                newsController.setData(it)
+                if (currentTab == "news") {
+                    newsController.setData(it)
+                }
+            }
+        })
+        viewModel.deletedNewsList.observe(viewLifecycleOwner, Observer { data ->
+            data?.let {
+                if (currentTab == "deleted") {
+                    newsController.setData(it)
+                }
             }
         })
     }
@@ -61,7 +67,7 @@ interface ArticleClick {
     fun onDelete(position: Int)
 }
 
-class NewsController(private val listener: ArticleClick) : TypedEpoxyController<NewsUI>() {
+class NewsController(private val listener: ArticleClick, private val currentTab: String) : TypedEpoxyController<NewsUI>() {
 
     override fun buildModels(data: NewsUI) {
         var i: Long = 0
@@ -69,6 +75,7 @@ class NewsController(private val listener: ArticleClick) : TypedEpoxyController<
             newsItemHolder {
                 id(i++)
                 image(newsCell.image)
+                newsTab(currentTab == "news")
                 description(newsCell.description)
                 clickListener { _, _, clickedView, position ->
                     when (clickedView.id) {
@@ -79,5 +86,4 @@ class NewsController(private val listener: ArticleClick) : TypedEpoxyController<
             }
         }
     }
-
 }

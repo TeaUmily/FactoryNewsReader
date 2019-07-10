@@ -13,8 +13,7 @@ val newsModule = module {
     factory { NewsInteractor(get()) }
     viewModel { NewsVM(get()) }
 
-    factory {  DeletedNewsController() }
-    factory { (listener: ArticleClick) -> NewsController(listener) }
+    factory { (currentTab: String, listener: ArticleClick) -> NewsController(listener, currentTab) }
 }
 
 private fun provideMealRestInterface(retrofit: Retrofit): NewsRestInterface =

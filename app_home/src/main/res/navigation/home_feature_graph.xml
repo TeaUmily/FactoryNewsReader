@@ -10,7 +10,7 @@
     <fragment
             android:id="@+id/fragmentNavigation"
             android:name="com.example.app_home.news.fragment.NavigationFragment"
-            tools:layout="@layout/fragment_frame">
+            tools:layout="@layout/fragment_bottom_nav">
 
         <action
                 android:id="@+id/openSingleFeatureAction"
