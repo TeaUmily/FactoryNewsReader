@@ -3,31 +3,56 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:tools="http://schemas.android.com/tools">
+        android:layout_height="match_parent">
 
-
-    <fragment
-            android:id="@+id/bottomNavigationFragment"
+    <FrameLayout
+            android:id="@+id/navigationItemsContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="androidx.navigation.fragment.NavHostFragment"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/nav_secondary"
-            android:layout_above="@+id/bottomNavigation">
-    </fragment>
+            android:layout_above="@+id/customBottomNavigation">
+    </FrameLayout>
 
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="70dp"
+                  android:orientation="horizontal"
+                  android:weightSum="3"
+                  android:visibility="visible"
+                  android:background="@color/colorPrimary"
+                  android:id="@+id/customBottomNavigation"
+                  android:layout_alignParentBottom="true">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:background="@color/colorPrimary"
-            android:layout_alignParentBottom="true"
-            app:itemIconTint="#fff"
-            app:itemTextColor="#fff"
-            app:menu="@menu/bottom_navigation_menu" />
+        <Button android:id="@+id/newsBtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/news"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:background="@color/colorPrimary"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"/>
+
+        <Button android:id="@+id/deletedNewsBtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/deleted"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:background="@color/colorPrimary"
+                android:layout_gravity="center"
+                android:layout_height="match_parent"/>
+
+        <Button android:id="@+id/moreNewsBtn"
+                android:background="@color/colorPrimary"
+                android:text="@string/more"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:layout_width="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:layout_height="match_parent"/>
+
+    </LinearLayout>
 
 
 </RelativeLayout>

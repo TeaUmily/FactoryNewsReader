@@ -23,8 +23,6 @@ dependencies {
 
     implementation project(':app_common')
 
-
-
     implementation plugin.kotlin.runtime
     implementation deps.support.appCompact
 

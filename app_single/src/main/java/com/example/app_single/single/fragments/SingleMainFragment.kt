@@ -3,6 +3,7 @@ package com.example.app_single.single.fragments
 import android.os.Bundle
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.example.app_common.base.fragment.BaseFragment
@@ -23,25 +24,14 @@ class SingleMainFragment : BaseFragment<SingleVM>(), ViewPager.OnPageChangeListe
 
         if (arguments!!.getBoolean("from notification")) {
 
-            handleOnBackPressed()
             viewModel.position = viewModel.getPosition(arguments!!.getInt("EXTRA_POSITION", 0))
 
         } else {
             viewModel.position = arguments!!.getInt("EXTRA_POSITION", 0)
         }
-
         initObserver()
-
     }
 
-    private fun handleOnBackPressed() {
-        val callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                findNavController().navigateUp()
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(callback)
-    }
 
     private fun initObserver() {
         viewModel.singleData.observe(viewLifecycleOwner, Observer { data ->
@@ -55,7 +45,6 @@ class SingleMainFragment : BaseFragment<SingleVM>(), ViewPager.OnPageChangeListe
                 }
             }
         })
-
     }
 
     override fun onPageScrollStateChanged(state: Int) {}

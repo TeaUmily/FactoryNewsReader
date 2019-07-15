@@ -11,7 +11,6 @@ import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.bumptech.glide.Glide
 import com.example.app_home.R
 import com.example.app_home.R2
-import com.example.app_home.R2.string.deleted
 import com.example.deliverytest.base.epoxy.KotlinHolder
 
 @EpoxyModelClass(layout = R2.layout.cell_news_item)
@@ -50,6 +49,16 @@ abstract class NewsItemHolderModel : EpoxyModelWithHolder<NewsItemHolder>() {
         holder.description.text = description
     }
 
+
+    override fun unbind(holder: NewsItemHolder) {
+
+        holder.description.setOnClickListener(null)
+        holder.imageView.setOnClickListener(null)
+        holder.deleteBtn.setOnClickListener(null)
+
+    }
+
+
     private fun changeContent(holder: NewsItemHolder) {
         if (isImageClicked) {
             holder.description.visibility = View.INVISIBLE
@@ -59,6 +68,7 @@ abstract class NewsItemHolderModel : EpoxyModelWithHolder<NewsItemHolder>() {
             holder.deleteBtn.visibility = View.INVISIBLE
         }
     }
+
 
 }
 

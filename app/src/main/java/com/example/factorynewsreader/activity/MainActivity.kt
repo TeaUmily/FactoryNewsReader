@@ -1,19 +1,18 @@
 package com.example.factorynewsreader.activity
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.os.Build
+
+import android.content.Intent
+import android.os.Bundle
 import android.util.Log
-import androidx.core.app.NavUtils
 import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.app_common.base.activity.BaseActivity
 import com.example.factorynewsreader.R
 import com.example.factorynewsreader.fcm.createNotificationChannel
 import com.google.firebase.FirebaseApp
 import com.google.firebase.iid.FirebaseInstanceId
-
 
 class MainActivity : BaseActivity() {
 
@@ -23,9 +22,10 @@ class MainActivity : BaseActivity() {
     override fun onSupportNavigateUp() =
         Navigation.findNavController(findViewById(R.id.homeNavigationFragment)).navigateUp()
 
-    override fun initUi() {
-        setupNavigation()
 
+    override fun initUi() {
+
+        setupNavigation()
         createNotificationChannel(
             baseContext,
             NotificationManagerCompat.IMPORTANCE_DEFAULT,
@@ -46,8 +46,13 @@ class MainActivity : BaseActivity() {
         val navController = Navigation.findNavController(findViewById(R.id.homeNavigationFragment))
         NavigationUI.setupActionBarWithNavController(this@MainActivity, navController)
 
-
     }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+    }
+
 
 }
 

@@ -7,10 +7,11 @@ import com.example.app_home.common.interactor.NewsInteractor
 class NewsVM(private val interactor: NewsInteractor) : BaseViewModel() {
 
     val newsData = MutableLiveData<NewsUI>()
-
+    val hideToolbar = MutableLiveData<Boolean>()
 
     init {
         newsData.value = null
+        hideToolbar.value = false
 
         loadNews()
     }
@@ -31,8 +32,8 @@ class NewsVM(private val interactor: NewsInteractor) : BaseViewModel() {
         return NewsUI(newsData.value!!.data.filter { newsCell -> newsCell.deleted }.toMutableList())
     }
 
-    fun deleteArticle(position: Int) {
-        newsData.value!!.data[position].deleted = true
+    fun deleteArticle(description: String) {
+        newsData.value!!.data.find { description == it.description }!!.deleted = true
         newsData.value = newsData.value
     }
 
